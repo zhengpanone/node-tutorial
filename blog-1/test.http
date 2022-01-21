@@ -1,0 +1,22 @@
+### 更新博客
+PUT http://127.0.0.1:8000/api/blog/update?id=6 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "标题6",
+    "content": "内容6"
+}
+
+### 删除博客
+DELETE http://127.0.0.1:8000/api/blog/delete?id=6 HTTP/1.1
+content-type: application/json
+
+
+### 用户登录
+POST http://127.0.0.1:8000/api/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "zhangsan",
+    "password": "123321"
+}
