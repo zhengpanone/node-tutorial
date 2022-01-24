@@ -32,20 +32,27 @@ const getPostData = (req) => {
 
 const serverHandle = (req, res) => {
     res.setHeader('Content-type', 'application/json')
-    /* const resData = {
-        name: 'Node Js Learn',
-        site: 'http://test',
-        env: process.env.NODE_ENV
-    }
-    res.end(
-        JSON.stringify(resData)
-    ) */
+
     // 处理blog路由
     const url = req.url
     req.path = url.split('?')[0]
 
     //解析query
     req.query = querystring.parse(url.split('?')[1])
+    // 解析 cookie
+    req.cookie = {}
+    const cookieStr = req.headers.cookie || ''
+    cookieStr.split(";").forEach(item => {
+        if (!item) {
+            return
+        }
+        const arr = item.split('=')
+
+        const key = arr[0].trim()
+        const val = arr[1]
+        req.cookie[key] = val
+    });
+    console.log('req cookie is', req.cookie);
 
     // 处理post data
     getPostData(req).then(postData => {

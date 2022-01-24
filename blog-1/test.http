@@ -20,3 +20,10 @@ content-type: application/json
     "username": "zhangsan",
     "password": "123321"
 }
+
+### 用户登录测试
+GET http://127.0.0.1:8000/api/user/login-test HTTP/1.1
+content-type: application/json
+
+
+    
