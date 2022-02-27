@@ -1,17 +1,38 @@
 const redis = require("redis");
+const { REDIS_CONF } = require("../conf/db");
 
-const client = redis.createClient(6379, "127.0.0.1");
-
+const client = redis.createClient(REDIS_CONF.port, REDIS_CONF.host);
 client.on("error", (err) => {
-  console.log(err);
+  console.error(err);
 });
 
-client.set("myname", "zhangsan", redis.print);
-client.get("myname", (err, val) => {
-  if (err) {
-    console.error(err);
-    return;
+function set(key, val) {
+  if (typeof val === "object") {
+    val = JSON.stringify(val);
   }
-  console.log(val);
-  client.quit();
-});
+  client.set(key, val, redis.print);
+}
+function get(key) {
+  const promise = new Promise((resolve, reject) => {
+    client.get(key, (err, val) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      if (val === null) {
+        resolve(null);
+      }
+      try {
+        resolve(JSON.parse(val));
+      } catch (ex) {
+        resolve(val);
+      }
+    });
+  });
+  return promise;
+}
+
+module.exports = {
+  set,
+  get,
+};

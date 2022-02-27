@@ -11,7 +11,10 @@ if (env === "dev") {
     port: "3306",
     database: "myblog",
   };
-  REDIS_CONF = { host: "localhost", port: "6379" };
+  REDIS_CONF = {
+    host: "localhost",
+    port: "6379",
+  };
 }
 if (env === "pro") {
   MYSQL_CONF = {
@@ -21,7 +24,10 @@ if (env === "pro") {
     port: "3306",
     database: "myblog",
   };
-  REDIS_CONF = { host: "localhost", port: "6379" };
+  REDIS_CONF = {
+    host: "localhost",
+    port: "6379",
+  };
 }
 
 module.exports = { MYSQL_CONF, REDIS_CONF };

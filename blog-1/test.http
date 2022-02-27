@@ -1,3 +1,7 @@
+### 查看博客
+GET  http://127.0.0.1:8000/api/blog/list HTTP/1.1
+content-type: application/json
+
 ### 更新博客
 PUT http://127.0.0.1:8000/api/blog/update?id=6 HTTP/1.1
 content-type: application/json
